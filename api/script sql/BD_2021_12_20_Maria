@@ -1,0 +1,27 @@
+CREATE TABLE servico (
+	codigo integer NOT NULL,
+	descricao varchar(200) NOT NULL,
+	valor numeric(5,2) NOT NULL,
+	
+	CONSTRAINT servico PRIMARY KEY (codigo)
+);
+
+INSERT INTO
+servico (codigo, descricao, valor) 
+VALUES
+(1, 'Exame de Sangue', 200.00),
+(2, 'Consulta', 100.00),
+(3, 'Teste', 140.00);
+
+CREATE TABLE atendimento_maria (
+	id SERIAL NOT NULL,
+	codigo_paciente integer,
+	tipo_atendimento varchar(23) NOT NULL,
+	data timestamp NOT NULL,
+	local varchar(250) NOT NULL,
+	id_servico integer NOT NULL,
+	
+	CONSTRAINT atendimento PRIMARY KEY (id),
+    CONSTRAINT atendimento_servico_fk FOREIGN KEY (id_servico) REFERENCES servico(codigo)
+);
+
